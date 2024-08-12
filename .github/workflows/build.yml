@@ -119,6 +119,13 @@ jobs:
     name: OHOS (arm64-v8a)
     runs-on: ubuntu-20.04
     steps:
+    - name: free disk space
+      run: |
+        sudo swapoff -a
+        sudo rm -f /swapfile
+        sudo apt clean
+        docker rmi $(docker image ls -aq)
+        df -h
     - uses: actions/checkout@v2
     - name: Install NDK
       run: |
