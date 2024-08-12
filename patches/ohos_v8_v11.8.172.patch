@@ -65,17 +65,6 @@ index a91d61c8c26..9201ee5a63b 100644
  ###############################################################################
  # Executables
  #
-diff --git a/gni/snapshot_toolchain.gni b/gni/snapshot_toolchain.gni
-index 637dcd39c45..7ad3fde014b 100644
---- a/gni/snapshot_toolchain.gni
-+++ b/gni/snapshot_toolchain.gni
-@@ -124,5 +124,6 @@ assert(v8_snapshot_toolchain != "",
- v8_generator_toolchain = v8_snapshot_toolchain
- if (host_cpu == "x64" &&
-     (v8_current_cpu == "mips" || v8_current_cpu == "mips64")) {
-+  print("v8_generator_toolchain")
-   v8_generator_toolchain = "//build/toolchain/linux:clang_x64"
- }
 diff --git a/gni/v8.gni b/gni/v8.gni
 index 403890733bf..d02563f778c 100644
 --- a/gni/v8.gni
@@ -93,51 +82,3 @@ index 403890733bf..d02563f778c 100644
 +    configs += invoker.configs
 +  }
 +}
-diff --git a/tools/clusterfuzz/foozzie/toolchain/BUILD.gn b/tools/clusterfuzz/foozzie/toolchain/BUILD.gn
-index ddcb4e1ad2c..ec038b08461 100644
---- a/tools/clusterfuzz/foozzie/toolchain/BUILD.gn
-+++ b/tools/clusterfuzz/foozzie/toolchain/BUILD.gn
-@@ -8,6 +8,7 @@ import("//build/toolchain/gcc_toolchain.gni")
- # build in a nested build sub-directory. We toggle pointer compression when
- # this toolchain is used in v8/BUILD.gn.
- clang_toolchain("clang_x64_pointer_compression") {
-+  print("clang_x64_pointer_compression in")
-   toolchain_args = {
-     current_cpu = "x64"
-     current_os = "linux"
-diff --git a/tools/toolchain/BUILD.gn b/tools/toolchain/BUILD.gn
-index b252c5eed53..887f8b6be94 100644
---- a/tools/toolchain/BUILD.gn
-+++ b/tools/toolchain/BUILD.gn
-@@ -5,6 +5,7 @@
- import("//build/toolchain/gcc_toolchain.gni")
- 
- gcc_toolchain("mips-bundled") {
-+  print("mips-bundled in")
-   toolprefix = rebase_path("//tools/mips_toolchain/bin/mips-mti-linux-gnu-",
-                            root_build_dir)
-   cc = "${toolprefix}gcc"
-@@ -27,6 +28,7 @@ gcc_toolchain("mips-bundled") {
- }
- 
- gcc_toolchain("mips64-bundled") {
-+  print("mips64-bundled in")
-   toolprefix = rebase_path("//tools/mips_toolchain/bin/mips-mti-linux-gnu-",
-                            root_build_dir)
-   cc = "${toolprefix}gcc"
-@@ -49,6 +51,7 @@ gcc_toolchain("mips64-bundled") {
- }
- 
- gcc_toolchain("mipsel-bundled") {
-+  print("mipsel-bundled in")
-   toolprefix = rebase_path("//tools/mips_toolchain/bin/mips-mti-linux-gnu-",
-                            root_build_dir)
-   cc = "${toolprefix}gcc"
-@@ -71,6 +74,7 @@ gcc_toolchain("mipsel-bundled") {
- }
- 
- gcc_toolchain("mips64el-bundled") {
-+  print("mips64el-bundled in")
-   toolprefix = rebase_path("//tools/mips_toolchain/bin/mips-mti-linux-gnu-",
-                            root_build_dir)
-   cc = "${toolprefix}gcc"
